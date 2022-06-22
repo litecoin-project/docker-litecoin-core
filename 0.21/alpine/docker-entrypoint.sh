@@ -2,24 +2,24 @@
 set -e
 
 if [ $(echo "$1" | cut -c1) = "-" ]; then
-  echo "$0: assuming arguments for bitcoind"
+  echo "$0: assuming arguments for litecoind"
 
-  set -- bitcoind "$@"
+  set -- litecoind "$@"
 fi
 
-if [ $(echo "$1" | cut -c1) = "-" ] || [ "$1" = "bitcoind" ]; then
-  mkdir -p "$BITCOIN_DATA"
-  chmod 700 "$BITCOIN_DATA"
-  chown -R bitcoin "$BITCOIN_DATA"
+if [ $(echo "$1" | cut -c1) = "-" ] || [ "$1" = "litecoind" ]; then
+  mkdir -p "$LITECOIN_DATA"
+  chmod 700 "$LITECOIN_DATA"
+  chown -R litecoin "$LITECOIN_DATA"
 
-  echo "$0: setting data directory to $BITCOIN_DATA"
+  echo "$0: setting data directory to $LITECOIN_DATA"
 
-  set -- "$@" -datadir="$BITCOIN_DATA"
+  set -- "$@" -datadir="$LITECOIN_DATA"
 fi
 
-if [ "$1" = "bitcoind" ] || [ "$1" = "bitcoin-cli" ] || [ "$1" = "bitcoin-tx" ]; then
+if [ "$1" = "litecoind" ] || [ "$1" = "litecoin-cli" ] || [ "$1" = "litecoin-tx" ]; then
   echo
-  exec su-exec bitcoin "$@"
+  exec su-exec litecoin "$@"
 fi
 
 echo
