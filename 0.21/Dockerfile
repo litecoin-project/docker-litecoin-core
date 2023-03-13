@@ -38,7 +38,7 @@ COPY docker-entrypoint.sh /entrypoint.sh
 
 VOLUME ["/home/litecoin/.litecoin"]
 
-EXPOSE 9332 9333 19332 19333 19443 19444 39333 39332
+EXPOSE 9332 9333 19332 19335 19443 19444 39333 39332
 
 
 ENTRYPOINT ["/entrypoint.sh"]
