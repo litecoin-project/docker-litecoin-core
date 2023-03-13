@@ -10,8 +10,8 @@ A litecoin-core docker image with support for the following platforms:
 
 ## Tags
 
-- `0.21.2.1`, `0.21` ([0.21/Dockerfile](https://github.com/litecoin-project/docker-litecoin-core/blob/master/0.21/Dockerfile)) [**multi-arch**]
-- `0.21.1-alpine`, `0.21-alpine` ([0.21/alpine/Dockerfile](https://github.com/litecoin-project/docker-litecoin-core/blob/master/0.21/alpine/Dockerfile))
+- `0.21.2.2`, `0.21` ([0.21/Dockerfile](https://github.com/litecoin-project/docker-litecoin-core/blob/master/0.21/Dockerfile)) [**multi-arch**]
+- `0.21.2.2-alpine`, `0.21-alpine` ([0.21/alpine/Dockerfile](https://github.com/litecoin-project/docker-litecoin-core/blob/master/0.21/alpine/Dockerfile))
 
 **Multi-architecture builds**
 
