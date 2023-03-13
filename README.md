@@ -1,4 +1,4 @@
-# litecoin-project/litecoin-core
+# litecoinproject/litecoin-core
 
 A litecoin-core docker image with support for the following platforms:
 
@@ -6,7 +6,7 @@ A litecoin-core docker image with support for the following platforms:
 * `arm32v7` (armv7)
 * `arm64` (aarch64, armv8)
 
-[![litecoin-project/litecoin-core][docker-pulls-image]][docker-hub-url] [![litecoin-project/litecoin-core][docker-stars-image]][docker-hub-url] [![litecoin-project/litecoin-core][docker-size-image]][docker-hub-url]
+[![litecoinproject/litecoin-core][docker-pulls-image]][docker-hub-url] [![litecoinproject/litecoin-core][docker-stars-image]][docker-hub-url] [![litecoinproject/litecoin-core][docker-size-image]][docker-hub-url]
 
 ## Tags
 
@@ -19,10 +19,10 @@ The newest images (Debian-based, *0.19+*) provide built-in support for multiple 
 
 **Picking the right tag**
 
-- `litecoin-project/litecoin-core:latest`: points to the latest stable release available of Litecoin Core. Caution when using in production as blindly upgrading Litecoin Core is a risky procedure.
-- `litecoin-project/litecoin-core:alpine`: same as above but using the Alpine Linux distribution (a resource efficient Linux distribution with security in mind, but not officially supported by the Litecoin Core team — use at your own risk).
-- `litecoin-project/litecoin-core:<version>`: based on a slim Debian image, this tag format points to a specific version branch (e.g. `0.20`) or release of Litecoin Core (e.g. `0.20.1`). Uses the pre-compiled binaries which are distributed by the Litecoin Core team.
-- `litecoin-project/litecoin-core:<version>-alpine`: same as above but using the Alpine Linux distribution.
+- `litecoinproject/litecoin-core:latest`: points to the latest stable release available of Litecoin Core. Caution when using in production as blindly upgrading Litecoin Core is a risky procedure.
+- `litecoinproject/litecoin-core:alpine`: same as above but using the Alpine Linux distribution (a resource efficient Linux distribution with security in mind, but not officially supported by the Litecoin Core team — use at your own risk).
+- `litecoinproject/litecoin-core:<version>`: based on a slim Debian image, this tag format points to a specific version branch (e.g. `0.20`) or release of Litecoin Core (e.g. `0.20.1`). Uses the pre-compiled binaries which are distributed by the Litecoin Core team.
+- `litecoinproject/litecoin-core:<version>-alpine`: same as above but using the Alpine Linux distribution.
 
 ## What is Litecoin Core?
 
@@ -35,7 +35,7 @@ Litecoin Core is a reference client that implements the Litecoin protocol for re
 This image contains the main binaries from the Litecoin Core project - `litecoind`, `litecoin-cli` and `litecoin-tx`. It behaves like a binary, so you can pass any arguments to the image and they will be forwarded to the `litecoind` binary:
 
 ```sh
-❯ docker run --rm -it litecoin-project/litecoin-core \
+❯ docker run --rm -it litecoinproject/litecoin-core \
   -printtoconsole \
   -regtest=1 \
   -rpcallowip=172.17.0.0/16 \
@@ -47,7 +47,7 @@ _Note: [learn more](#using-rpcauth-for-remote-authentication) about how `-rpcaut
 By default, `litecoind` will run as user `litecoin` for security reasons and with its default data dir (`~/.litecoin`). If you'd like to customize where `litecoin-core` stores its data, you must use the `LITECOIN_DATA` environment variable. The directory will be automatically created with the correct permissions for the `litecoin` user and `litecoin-core` automatically configured to use it.
 
 ```sh
-❯ docker run --env LITECOIN_DATA=/var/lib/litecoin-core --rm -it litecoin-project/litecoin-core \
+❯ docker run --env LITECOIN_DATA=/var/lib/litecoin-core --rm -it litecoinproject/litecoin-core \
   -printtoconsole \
   -regtest=1
 ```
@@ -55,7 +55,7 @@ By default, `litecoind` will run as user `litecoin` for security reasons and wit
 You can also mount a directory in a volume under `/home/litecoin/.litecoin` in case you want to access it on the host:
 
 ```sh
-❯ docker run -v ${PWD}/data:/home/litecoin/.litecoin -it --rm litecoin-project/litecoin-core \
+❯ docker run -v ${PWD}/data:/home/litecoin/.litecoin -it --rm litecoinproject/litecoin-core \
   -printtoconsole \
   -regtest=1
 ```
@@ -64,7 +64,7 @@ You can optionally create a service using `docker-compose`:
 
 ```yml
 litecoin-core:
-  image: litecoin-project/litecoin-core
+  image: litecoinproject/litecoin-core
   command:
     -printtoconsole
     -regtest=1
@@ -83,7 +83,7 @@ The second option is making a remote procedure call using a username and passwor
 Start by launch the Litecoin Core daemon:
 
 ```sh
-❯ docker run --rm --name litecoin-server -it litecoin-project/litecoin-core \
+❯ docker run --rm --name litecoin-server -it litecoinproject/litecoin-core \
   -printtoconsole \
   -regtest=1
 ```
@@ -132,7 +132,7 @@ Now that you have your credentials, you need to start the Litecoin Core daemon w
 Let's opt for the Docker way:
 
 ```sh
-❯ docker run --rm --name litecoin-server -it litecoin-project/litecoin-core \
+❯ docker run --rm --name litecoin-server -it litecoinproject/litecoin-core \
   -printtoconsole \
   -regtest=1 \
   -rpcallowip=172.17.0.0/16 \
@@ -149,7 +149,7 @@ You can now connect via `litecoin-cli`. You will still have to define a username
 To avoid any confusion about whether or not a remote call is being made, let's spin up another container to execute `litecoin-cli` and connect it via the Docker network using the password generated above:
 
 ```sh
-❯ docker run -it --link litecoin-server --rm litecoin-project/litecoin-core \
+❯ docker run -it --link litecoin-server --rm litecoinproject/litecoin-core \
   litecoin-cli \
   -rpcconnect=litecoin-server \
   -regtest \
@@ -178,7 +178,7 @@ Example for running a node in `regtest` mode mapping JSON-RPC/REST (19443) and P
 docker run --rm -it \
   -p 19443:19443 \
   -p 19444:19444 \
-  litecoin-project/litecoin-core \
+  litecoinproject/litecoin-core \
   -printtoconsole \
   -regtest=1 \
   -rpcallowip=172.17.0.0/16 \
@@ -221,7 +221,7 @@ This image is officially supported on Docker version 17.09, with support for old
 [License information](https://github.com/litecoin-project/litecoin/blob/master/COPYING) for the software contained in this image.
 [License information](https://github.com/ruimarinho/docker-bitcoin-core/blob/master/LICENSE) for the [ruimarinho/docker-bitcoin-core][docker-hub-url] docker project.
 
-[docker-hub-url]: https://hub.docker.com/r/litecoin-project/litecoin-core
-[docker-pulls-image]: https://img.shields.io/docker/pulls/litecoin-project/litecoin-core.svg?style=flat-square
-[docker-size-image]: https://img.shields.io/docker/image-size/litecoin-project/litecoin-core?style=flat-square
-[docker-stars-image]: https://img.shields.io/docker/stars/litecoin-project/litecoin-core.svg?style=flat-square
+[docker-hub-url]: https://hub.docker.com/r/litecoinproject/litecoin-core
+[docker-pulls-image]: https://img.shields.io/docker/pulls/litecoinproject/litecoin-core.svg?style=flat-square
+[docker-size-image]: https://img.shields.io/docker/image-size/litecoinproject/litecoin-core?style=flat-square
+[docker-stars-image]: https://img.shields.io/docker/stars/litecoinproject/litecoin-core.svg?style=flat-square
