@@ -74,7 +74,7 @@ RUN sed -i '/#include <attributes.h>/a #include <cstdint>' src/util/bip32.h
 RUN sed -i '/#include <cstring>/a #include <cstdint>' src/util/string.h
 # fixes overflow causing segfault
 RUN sed -i '/char\ scratchpad\[SCRYPT_SCRATCHPAD_SIZE\];/a\memset(scratchpad, 0, sizeof(scratchpad));' src/crypto/scrypt.cpp
-RUN sed -i 's/char\ scratchpad\[SCRYPT_SCRATCHPAD_SIZE\];/static &/g' src/crypto/scrypt.cpp
+RUN sed -i 's/char\ scratchpad\[SCRYPT_SCRATCHPAD_SIZE\];/thread_local &/g' src/crypto/scrypt.cpp
 # update filesystem to v1.2.2: fixes alpine build error
 RUN wget -O src/libmw/deps/ghc/include/ghc/filesystem.hpp https://github.com/gulrak/filesystem/releases/download/v1.2.2/filesystem.hpp
 
