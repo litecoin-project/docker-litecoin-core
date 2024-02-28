@@ -34,15 +34,17 @@ RUN apk --no-cache add boost-dev
 RUN apk --no-cache add build-base
 RUN apk --no-cache add chrpath
 RUN apk --no-cache add file
+RUN apk --no-cache add fmt-dev
 RUN apk --no-cache add gnupg
 RUN apk --no-cache add libevent-dev
 RUN apk --no-cache add libressl
+RUN apk --no-cache add libressl-dev
 RUN apk --no-cache add libtool
 RUN apk --no-cache add linux-headers
 RUN apk --no-cache add zeromq-dev
 RUN set -ex \
   && for key in \
-  90C8019E36C2E964 \
+  d35621d53a1cc6a3456758d03620e9d387e55666 \
   ; do \
   gpg --batch --keyserver keyserver.ubuntu.com --recv-keys "$key" || \
   gpg --batch --keyserver pgp.mit.edu --recv-keys "$key" || \
@@ -63,8 +65,19 @@ RUN tar -xzf *.tar.gz
 WORKDIR /litecoin-${LITECOIN_VERSION}
 
 RUN sed -i '/AC_PREREQ/a\AR_FLAGS=cr' src/univalue/configure.ac
-RUN sed -i '/AX_PROG_CC_FOR_BUILD/a\AR_FLAGS=cr' src/secp256k1/configure.ac
+RUN sed -i '/AX_PROG_CC_FOR_BUILD/a\AR_FLAGS=cr' src/secp256k1-zkp/configure.ac
 RUN sed -i s:sys/fcntl.h:fcntl.h: src/compat.h
+
+# missing includes required by alpine compiler
+RUN sed -i '/#include <stdint.h>/a #include <stdexcept>' src/support/lockedpool.h
+RUN sed -i '/#include <attributes.h>/a #include <cstdint>' src/util/bip32.h
+RUN sed -i '/#include <cstring>/a #include <cstdint>' src/util/string.h
+# fixes overflow causing segfault
+RUN sed -i '/char\ scratchpad\[SCRYPT_SCRATCHPAD_SIZE\];/a\memset(scratchpad, 0, sizeof(scratchpad));' src/crypto/scrypt.cpp
+RUN sed -i 's/char\ scratchpad\[SCRYPT_SCRATCHPAD_SIZE\];/static &/g' src/crypto/scrypt.cpp
+# update filesystem to v1.2.2: fixes alpine build error
+RUN wget -O src/libmw/deps/ghc/include/ghc/filesystem.hpp https://github.com/gulrak/filesystem/releases/download/v1.2.2/filesystem.hpp
+
 RUN ./autogen.sh
 RUN ./configure LDFLAGS=-L`ls -d /opt/db*`/lib/ CPPFLAGS=-I`ls -d /opt/db*`/include/ \
   --prefix=${LITECOIN_PREFIX} \
@@ -97,7 +110,9 @@ RUN apk --no-cache add \
   boost-thread \
   libevent \
   libzmq \
-  su-exec
+  su-exec \
+  fmt-dev \
+  libressl-dev
 
 ENV LITECOIN_DATA=/home/litecoin/.litecoin
 ENV LITECOIN_VERSION=0.21.2.2
@@ -109,7 +124,7 @@ COPY docker-entrypoint.sh /entrypoint.sh
 
 VOLUME ["/home/litecoin/.litecoin"]
 
-EXPOSE 9332 9333 19332 19335 19444
+EXPOSE 9332 9333 19332 19335 19443 19444
 
 ENTRYPOINT ["/entrypoint.sh"]
 
