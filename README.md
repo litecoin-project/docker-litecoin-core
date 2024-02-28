@@ -26,7 +26,7 @@ The newest images (Debian-based, *0.19+*) provide built-in support for multiple 
 
 ## What is Litecoin Core?
 
-Litecoin Core is a reference client that implements the Litecoin protocol for remote procedure call (RPC) use. It is also the second Litecoin client in the network's history. Learn more about Litecoin Core on the [Bitcoin Developer Reference docs](https://bitcoin.org/en/developer-reference).
+Litecoin Core is a reference client that implements the Litecoin protocol for remote procedure call (RPC) use. It is also the second Litecoin client in the network's history. Learn more about Litecoin Core on the [Litecoin Wiki](https://litecoin.info).
 
 ## Usage
 
@@ -207,11 +207,6 @@ curl --data-binary '{"jsonrpc":"1.0","id":"1","method":"getnetworkinfo","params"
 - JSON-RPC/REST: 19443 (_since 0.16+_, otherwise _19332_)
 - P2P: 19444
 
-#### Signet
-
-- JSON-RPC/REST: 39332
-- P2P: 39333
-
 ## Docker
 
 This image is officially supported on Docker version 17.09, with support for older versions provided on a best-effort basis.
@@ -219,7 +214,8 @@ This image is officially supported on Docker version 17.09, with support for old
 ## License
 
 [License information](https://github.com/litecoin-project/litecoin/blob/master/COPYING) for the software contained in this image.
-[License information](https://github.com/ruimarinho/docker-bitcoin-core/blob/master/LICENSE) for the [ruimarinho/docker-bitcoin-core][docker-hub-url] docker project.
+
+[License information](https://github.com/ruimarinho/docker-bitcoin-core/blob/master/LICENSE) for the [ruimarinho/docker-bitcoin-core][https://github.com/ruimarinho/docker-bitcoin-core] docker project.
 
 [docker-hub-url]: https://hub.docker.com/r/litecoinproject/litecoin-core
 [docker-pulls-image]: https://img.shields.io/docker/pulls/litecoinproject/litecoin-core.svg?style=flat-square
