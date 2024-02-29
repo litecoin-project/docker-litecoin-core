@@ -27,7 +27,7 @@ jobs:
           LATEST_LITECOIN_MAJOR_VERSION=$(find . -type d -maxdepth 1 -not -path '*/\.*' | sort -n | tail -n 1 | cut -c 3-)
           PLATFORMS="linux/amd64"
           PUSH=false
-          REPO=${{ github.repository_owner }}/litecoin-core
+          REPO=litecoinproject/litecoin-core
           TAGS=()
 
           if [[ $GITHUB_REF == refs/tags/* ]]; then
