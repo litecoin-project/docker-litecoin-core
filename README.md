@@ -10,8 +10,10 @@ A litecoin-core docker image with support for the following platforms:
 
 ## Tags
 
-- `0.21.2.2`, `0.21` ([0.21/Dockerfile](https://github.com/litecoin-project/docker-litecoin-core/blob/master/0.21/Dockerfile)) [**multi-arch**]
-- `0.21.2.2-alpine`, `0.21-alpine` ([0.21/alpine/Dockerfile](https://github.com/litecoin-project/docker-litecoin-core/blob/master/0.21/alpine/Dockerfile))
+- `0.21.4`, `0.21` ([0.21/Dockerfile](https://github.com/litecoin-project/docker-litecoin-core/blob/master/0.21/Dockerfile)) [**multi-arch**]
+- `0.21.4-alpine`, `0.21-alpine` ([0.21/alpine/Dockerfile](https://github.com/litecoin-project/docker-litecoin-core/blob/master/0.21/alpine/Dockerfile))
+- `0.21.2.2` ([0.21.2.2/Dockerfile](https://github.com/litecoin-project/docker-litecoin-core/blob/0.21.2.2/0.21/Dockerfile)) [**multi-arch**]
+- `0.21.2.2-alpine` ([0.21.2.2/alpine/Dockerfile](https://github.com/litecoin-project/docker-litecoin-core/blob/0.21.2.2/0.21/alpine/Dockerfile))
 
 **Multi-architecture builds**
 
@@ -21,7 +23,7 @@ The newest images (Debian-based, *0.21+*) provide built-in support for multiple 
 
 - `litecoinproject/litecoin-core:latest`: points to the latest stable release available of Litecoin Core. Caution when using in production as blindly upgrading Litecoin Core is a risky procedure.
 - `litecoinproject/litecoin-core:alpine`: same as above but using the Alpine Linux distribution (a resource efficient Linux distribution with security in mind, but not officially supported by the Litecoin Core team — use at your own risk).
-- `litecoinproject/litecoin-core:<version>`: based on a slim Debian image, this tag format points to a specific version branch (e.g. `0.21`) or release of Litecoin Core (e.g. `0.21.2.2`). Uses the pre-compiled binaries which are distributed by the Litecoin Core team.
+- `litecoinproject/litecoin-core:<version>`: based on a slim Debian image, this tag format points to a specific version branch (e.g. `0.21`) or release of Litecoin Core (e.g. `0.21.4`). Uses the pre-compiled binaries which are distributed by the Litecoin Core team.
 - `litecoinproject/litecoin-core:<version>-alpine`: same as above but using the Alpine Linux distribution.
 
 ## What is Litecoin Core?

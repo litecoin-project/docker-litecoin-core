@@ -9,7 +9,7 @@ RUN useradd -r litecoin \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ARG TARGETPLATFORM
-ENV LITECOIN_VERSION=0.21.2.2
+ENV LITECOIN_VERSION=0.21.4
 ENV LITECOIN_DATA=/home/litecoin/.litecoin
 ENV PATH=/opt/litecoin-${LITECOIN_VERSION}/bin:$PATH
 
