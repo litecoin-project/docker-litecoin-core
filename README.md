@@ -219,7 +219,7 @@ This image is officially supported on Docker version 17.09, with support for old
 
 [License information](https://github.com/litecoin-project/litecoin/blob/master/COPYING) for the software contained in this image.
 
-[License information](https://github.com/ruimarinho/docker-bitcoin-core/blob/master/LICENSE) for the [ruimarinho/docker-bitcoin-core][https://github.com/ruimarinho/docker-bitcoin-core] docker project.
+[License information](https://github.com/ruimarinho/docker-bitcoin-core/blob/master/LICENSE) for the [ruimarinho/docker-bitcoin-core](https://github.com/ruimarinho/docker-bitcoin-core) docker project.
 
 [docker-hub-url]: https://hub.docker.com/r/litecoinproject/litecoin-core
 [docker-pulls-image]: https://img.shields.io/docker/pulls/litecoinproject/litecoin-core.svg?style=flat-square
