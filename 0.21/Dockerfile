@@ -9,14 +9,17 @@ RUN useradd -r litecoin \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ARG TARGETPLATFORM
-ENV LITECOIN_VERSION=0.21.4
+ENV LITECOIN_VERSION=0.21.5.4
 ENV LITECOIN_DATA=/home/litecoin/.litecoin
 ENV PATH=/opt/litecoin-${LITECOIN_VERSION}/bin:$PATH
 
 RUN set -ex \
-  && if [ "${TARGETPLATFORM}" = "linux/amd64" ]; then export TARGETPLATFORM=x86_64-linux-gnu; fi \
-  && if [ "${TARGETPLATFORM}" = "linux/arm64" ]; then export TARGETPLATFORM=aarch64-linux-gnu; fi \
-  && if [ "${TARGETPLATFORM}" = "linux/arm/v7" ]; then export TARGETPLATFORM=arm-linux-gnueabihf; fi \
+  && case "${TARGETPLATFORM}" in \
+  linux/amd64) LITECOIN_PLATFORM=x86_64-linux-gnu ;; \
+  linux/arm64) LITECOIN_PLATFORM=aarch64-linux-gnu ;; \
+  linux/arm/v7) LITECOIN_PLATFORM=arm-linux-gnueabihf ;; \
+  *) echo "Unsupported platform: ${TARGETPLATFORM}" && exit 1 ;; \
+  esac \
   && for key in \
   d35621d53a1cc6a3456758d03620e9d387e55666 \
   ; do \
@@ -26,10 +29,10 @@ RUN set -ex \
   gpg --batch --keyserver ha.pool.sks-keyservers.net --recv-keys "$key" || \
   gpg --batch --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys "$key" ; \
   done \
-  && curl -SLO https://download.litecoin.org/litecoin-${LITECOIN_VERSION}/linux/litecoin-${LITECOIN_VERSION}-${TARGETPLATFORM}.tar.gz \
+  && curl -SLO https://download.litecoin.org/litecoin-${LITECOIN_VERSION}/litecoin-${LITECOIN_VERSION}-${LITECOIN_PLATFORM}.tar.gz \
   && curl -SLO https://download.litecoin.org/litecoin-${LITECOIN_VERSION}/SHA256SUMS.asc \
   && gpg --verify SHA256SUMS.asc \
-  && grep " litecoin-${LITECOIN_VERSION}-${TARGETPLATFORM}.tar.gz" SHA256SUMS.asc | sha256sum -c - \
+  && grep " litecoin-${LITECOIN_VERSION}-${LITECOIN_PLATFORM}.tar.gz" SHA256SUMS.asc | sha256sum -c - \
   && tar -xzf *.tar.gz -C /opt \
   && rm *.tar.gz *.asc \
   && rm -rf /opt/litecoin-${LITECOIN_VERSION}/bin/litecoin-qt

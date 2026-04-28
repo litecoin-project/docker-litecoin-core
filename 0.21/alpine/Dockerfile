@@ -1,5 +1,5 @@
 # Build stage for BerkeleyDB
-FROM alpine as berkeleydb
+FROM alpine AS berkeleydb
 
 RUN sed -i 's/http\:\/\/dl-cdn.alpinelinux.org/https\:\/\/alpine.global.ssl.fastly.net/g' /etc/apk/repositories
 RUN apk --no-cache add autoconf
@@ -17,13 +17,14 @@ RUN mkdir -p ${BERKELEYDB_PREFIX}
 
 WORKDIR /${BERKELEYDB_VERSION}/build_unix
 
-RUN CFLAGS=-Wno-error=implicit-function-declaration ../dist/configure --enable-cxx --disable-shared --with-pic --prefix=${BERKELEYDB_PREFIX}
+RUN cp /usr/share/automake-*/config.guess /usr/share/automake-*/config.sub ../dist/
+RUN CFLAGS=-Wno-error=implicit-function-declaration ../dist/configure --enable-cxx --disable-shared --with-pic --with-mutex=POSIX/pthreads --prefix=${BERKELEYDB_PREFIX}
 RUN make -j4
 RUN make install
 RUN rm -rf ${BERKELEYDB_PREFIX}/docs
 
 # Build stage for Litecoin Core
-FROM alpine as litecoin-core
+FROM alpine AS litecoin-core
 
 COPY --from=berkeleydb /opt /opt
 
@@ -53,11 +54,11 @@ RUN set -ex \
   gpg --batch --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys "$key" ; \
   done
 
-ENV LITECOIN_VERSION=0.21.4
+ENV LITECOIN_VERSION=0.21.5.4
 ENV LITECOIN_PREFIX=/opt/litecoin-${LITECOIN_VERSION}
 
 RUN wget https://download.litecoin.org/litecoin-${LITECOIN_VERSION}/SHA256SUMS.asc
-RUN wget https://download.litecoin.org/litecoin-${LITECOIN_VERSION}/src/litecoin-${LITECOIN_VERSION}.tar.gz
+RUN wget https://download.litecoin.org/litecoin-${LITECOIN_VERSION}/litecoin-${LITECOIN_VERSION}.tar.gz
 RUN gpg --verify SHA256SUMS.asc
 RUN grep " litecoin-${LITECOIN_VERSION}.tar.gz\$" SHA256SUMS.asc | sha256sum -c -
 RUN tar -xzf *.tar.gz
@@ -115,7 +116,7 @@ RUN apk --no-cache add \
   libressl-dev
 
 ENV LITECOIN_DATA=/home/litecoin/.litecoin
-ENV LITECOIN_VERSION=0.21.4
+ENV LITECOIN_VERSION=0.21.5.4
 ENV LITECOIN_PREFIX=/opt/litecoin-${LITECOIN_VERSION}
 ENV PATH=${LITECOIN_PREFIX}/bin:$PATH
 
