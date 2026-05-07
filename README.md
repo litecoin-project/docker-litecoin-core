@@ -10,8 +10,10 @@ A litecoin-core docker image with support for the following platforms:
 
 ## Tags
 
-- `0.21.5.4`, `0.21` ([0.21/Dockerfile](https://github.com/litecoin-project/docker-litecoin-core/blob/0.21.5.4/0.21/Dockerfile)) [**multi-arch**]
-- `0.21.5.4-alpine`, `0.21-alpine` ([0.21/alpine/Dockerfile](https://github.com/litecoin-project/docker-litecoin-core/blob/0.21.5.4/0.21/alpine/Dockerfile))
+- `0.21.5.5`, `0.21` ([0.21/Dockerfile](https://github.com/litecoin-project/docker-litecoin-core/blob/0.21.5.5/0.21/Dockerfile)) [**multi-arch**]
+- `0.21.5.5-alpine`, `0.21-alpine` ([0.21/alpine/Dockerfile](https://github.com/litecoin-project/docker-litecoin-core/blob/0.21.5.5/0.21/alpine/Dockerfile))
+- `0.21.5.4` ([0.21/Dockerfile](https://github.com/litecoin-project/docker-litecoin-core/blob/0.21.5.4/0.21/Dockerfile)) [**multi-arch**]
+- `0.21.5.4-alpine` ([0.21/alpine/Dockerfile](https://github.com/litecoin-project/docker-litecoin-core/blob/0.21.5.4/0.21/alpine/Dockerfile))
 - `0.21.4`, ([0.21/Dockerfile](https://github.com/litecoin-project/docker-litecoin-core/blob/0.21.4/0.21/Dockerfile)) [**multi-arch**]
 - `0.21.4-alpine`, ([0.21/alpine/Dockerfile](https://github.com/litecoin-project/docker-litecoin-core/blob/0.21.4/0.21/alpine/Dockerfile))
 - `0.21.2.2` ([0.21.2.2/Dockerfile](https://github.com/litecoin-project/docker-litecoin-core/blob/0.21.2.2/0.21/Dockerfile)) [**multi-arch**]

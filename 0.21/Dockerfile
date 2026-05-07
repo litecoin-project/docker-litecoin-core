@@ -9,7 +9,7 @@ RUN useradd -r litecoin \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ARG TARGETPLATFORM
-ENV LITECOIN_VERSION=0.21.5.4
+ENV LITECOIN_VERSION=0.21.5.5
 ENV LITECOIN_DATA=/home/litecoin/.litecoin
 ENV PATH=/opt/litecoin-${LITECOIN_VERSION}/bin:$PATH
 
@@ -29,7 +29,7 @@ RUN set -ex \
   gpg --batch --keyserver ha.pool.sks-keyservers.net --recv-keys "$key" || \
   gpg --batch --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys "$key" ; \
   done \
-  && curl -SLO https://download.litecoin.org/litecoin-${LITECOIN_VERSION}/litecoin-${LITECOIN_VERSION}-${LITECOIN_PLATFORM}.tar.gz \
+  && curl -SLO https://download.litecoin.org/litecoin-${LITECOIN_VERSION}/linux/litecoin-${LITECOIN_VERSION}-${LITECOIN_PLATFORM}.tar.gz \
   && curl -SLO https://download.litecoin.org/litecoin-${LITECOIN_VERSION}/SHA256SUMS.asc \
   && gpg --verify SHA256SUMS.asc \
   && grep " litecoin-${LITECOIN_VERSION}-${LITECOIN_PLATFORM}.tar.gz" SHA256SUMS.asc | sha256sum -c - \

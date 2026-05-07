@@ -54,11 +54,11 @@ RUN set -ex \
   gpg --batch --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys "$key" ; \
   done
 
-ENV LITECOIN_VERSION=0.21.5.4
+ENV LITECOIN_VERSION=0.21.5.5
 ENV LITECOIN_PREFIX=/opt/litecoin-${LITECOIN_VERSION}
 
 RUN wget https://download.litecoin.org/litecoin-${LITECOIN_VERSION}/SHA256SUMS.asc
-RUN wget https://download.litecoin.org/litecoin-${LITECOIN_VERSION}/litecoin-${LITECOIN_VERSION}.tar.gz
+RUN wget https://download.litecoin.org/litecoin-${LITECOIN_VERSION}/src/litecoin-${LITECOIN_VERSION}.tar.gz
 RUN gpg --verify SHA256SUMS.asc
 RUN grep " litecoin-${LITECOIN_VERSION}.tar.gz\$" SHA256SUMS.asc | sha256sum -c -
 RUN tar -xzf *.tar.gz
@@ -116,7 +116,7 @@ RUN apk --no-cache add \
   libressl-dev
 
 ENV LITECOIN_DATA=/home/litecoin/.litecoin
-ENV LITECOIN_VERSION=0.21.5.4
+ENV LITECOIN_VERSION=0.21.5.5
 ENV LITECOIN_PREFIX=/opt/litecoin-${LITECOIN_VERSION}
 ENV PATH=${LITECOIN_PREFIX}/bin:$PATH
 
