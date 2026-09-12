@@ -1,4 +1,4 @@
-FROM debian:bullseye-slim
+FROM debian:bookworm-slim
 
 LABEL maintainer.0="Loshan (@losh11)"
 
@@ -9,7 +9,7 @@ RUN useradd -r litecoin \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ARG TARGETPLATFORM
-ENV LITECOIN_VERSION=0.21.5.5
+ENV LITECOIN_VERSION=0.21.5.8
 ENV LITECOIN_DATA=/home/litecoin/.litecoin
 ENV PATH=/opt/litecoin-${LITECOIN_VERSION}/bin:$PATH
 
